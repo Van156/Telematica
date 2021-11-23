@@ -19,7 +19,7 @@ const ModuloAdministracion = () => {
 
     }
     return (
-        <div>
+        <div className='AlberCachon'>
             <form >
             <input type="text" name="userName" placeholder="Nombre" 
                 {
