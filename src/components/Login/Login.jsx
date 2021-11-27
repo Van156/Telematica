@@ -5,7 +5,7 @@ import LockIcon from "@mui/icons-material/Lock";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import styled from "styled-components";
 import axios from 'axios';
-import "./Login.css";
+import "../css/Login.css";
 import { rutas } from "../../path";
 
 const Login = () => {
@@ -26,63 +26,8 @@ const Login = () => {
     }
 
     return (
-        <div className="bgimage">
-            <div className="container centrar ">
-                <div className=" background">
-                    <div id="user-image">
-                        <img
-                            src="https://cdn.icon-icons.com/icons2/1879/PNG/512/iconfinder-3-avatar-2754579_120516.png"
-                            alt="F "
-                        />
-                    </div>
-
-                    <form onSubmit={handleSubmit} className="formularios">
-                        <div className="inputWithIcon">
-                            <PersonIcon className="icon" />
-                            <input
-                                type="text"
-                                placeholder="Nombre de usuario"
-                                name="userName"
-                                ref={register("userName", {
-                                    required: { value: true, message: "Campo requerido" },
-                                })}
-                                onChange={changeUsername}
-                            />
-
-                            <span className="text-danger text-small d-block mb-2">
-                                {errors?.pass?.message}
-                            </span>
-                        </div>
-                        <div className="inputWithIcon">
-                            <LockIcon className="icon" />
-                            <input
-                                type="Password"
-                                placeholder="Contraseña"
-                                name="pass"
-                                ref={register("pass", {
-                                    required: { value: true, message: "Campo requerido" },
-                                })}
-                                onChange={changePassword}
-                            />
-
-                            <span className="text-danger text-small d-block mb-2">
-                                {errors?.pass?.message}
-                            </span>
-                        </div>
-                        <div className="btcentrar">
-                            <Button
-                                type="submit"
-                                variant="contained"
-                                color="primary"
-                                endIcon={<ArrowForwardIcon />}
-                            >
-                                Iniciar
-                            </Button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+        <>
+        </>            
     );
 };
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import {useForm} from 'react-hook-form';
 import axios from 'axios';
-import './ModuloAdministracion.css';
+import './css/ModuloAdministracion.css';
 
 const ModuloAdministracion = () => {
 

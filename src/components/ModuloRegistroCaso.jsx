@@ -1,6 +1,6 @@
 
 import React from 'react'
-import './ModuloRegistroCaso.css';
+import './css/ModuloRegistroCaso.css';
 const ModuloRegistroCaso = () => {
     return (
         <div>

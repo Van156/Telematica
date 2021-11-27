@@ -6,8 +6,9 @@ import ModuloAdministracion from './components/ModuloAdministracion';
 import ModuloGestionarCaso from './components/ModuloGestionarCaso';
 import ModuloVisualizacion from './components/ModuloVisualizacion';
 import ModuloRegistroCaso from './components/ModuloRegistroCaso';
-import Login from './components/Login';
+import Login from './components/Login/Login';
 import Navbar from './components/Navbar';
+import MapView from './components/Map/Map';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path='/ModuloGestionarCaso' element={<ModuloGestionarCaso/>} />
           <Route path='/ModuloRegistroCaso' element={<ModuloRegistroCaso/>} />
           <Route path='/ModuloVisualizacion' element={<ModuloVisualizacion/>} />
+          <Route path='/mapa' element={<MapView/>} />
         </Routes>
 
       </Router>

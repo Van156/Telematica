@@ -1,5 +1,5 @@
 import React from 'react';
-import './ModuloGestionarCaso.css';
+import './css/ModuloGestionarCaso.css';
 const ModuloGestionarCaso = () => {
     return (
         <div>
