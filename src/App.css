@@ -1,44 +1,31 @@
-.App {
-  text-align: center;
+.leaflet-container {
+  width: 100vw;
+  height: 90vh;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.visualizacionContainer {
+  margin-top: 60px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-float infinite 3s ease-in-out;
-  }
-}
+.MapaResumen {
+  margin-top: 60px;
 
-.App-header {
-  min-height: 100vh;
+  width: 80vw;
   display: flex;
   flex-direction: column;
+}
+.Bar {
+  height: 260px;
+  width: 90vw;
+  margin: 30px;
+}
+.Pie {
+  height: 300px;
+  width: 30vw;
+  margin: 30px;
+}
+
+.Container-pie {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-}
-
-.App-link {
-  color: rgb(112, 76, 182);
-}
-
-@keyframes App-logo-float {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(10px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
-}
-
-.leaflet-container{
-  width: 100vw;
-  height: 100vh;
 }
