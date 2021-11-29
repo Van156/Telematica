@@ -1,19 +1,43 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./css/Navbar.css";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-import CloseIcon from "@mui/icons-material/Close";
 import styled from "styled-components";
+import useAuthContext from "./Login/auth/hooks/useAuthContext";
 
 const Navbar = () => {
-  const [burgerStatus, setBurgerStatus] = useState(false);
+
+  function getBool(val) {
+    return !!JSON.parse(String(val).toLowerCase());
+  }
+
+  let { isAyudanteAuthenticated, isMedicoAuthenticated, isAdminAuthenticated, logout } = useAuthContext();
+
+  isAyudanteAuthenticated = getBool(isAyudanteAuthenticated);
+  isMedicoAuthenticated = getBool(isMedicoAuthenticated);
+  isAdminAuthenticated = getBool(isAdminAuthenticated);
+
+  let loginButton = null;
+  let logoutButton = null;
+
+  if (!isAyudanteAuthenticated && !isMedicoAuthenticated && !isAdminAuthenticated) {
+    logoutButton = null;
+    loginButton = <>
+        <Link to="/Login">
+          <Button variant="contained" color="primary">
+            Login
+          </Button>
+        </Link>
+    </>
+  } else if (isAyudanteAuthenticated || isMedicoAuthenticated || isAdminAuthenticated) {
+    loginButton = null;
+    logoutButton = <button class="btn btn-outline-danger my-2 my-sm-0" onClick={logout}>Logout</button>;
+  }
 
   return (
     <Container>
-      {/* <img src="/images/logo.svg" alt="No te tocaba mani" />   */}
       <Link to="/">
-        <h1>BJT</h1>
+        <h1>Covid Tracker</h1>
       </Link>
 
       <Menu>
@@ -31,46 +55,15 @@ const Navbar = () => {
         </Link>
       </Menu>
       <RightMenu>
-        <a href="#">Shop</a>
-        <Link to="/Login">
-          <Button variant="contained" color="primary">
-            Login
-          </Button>
-        </Link>
-
-        <CustomMenu onClick={() => setBurgerStatus(true)} />
+        {loginButton}
+        {logoutButton}
       </RightMenu>
-      <BurgerNav show={burgerStatus}>
-        <CustomWrapper>
-          <CustomClose onClick={() => setBurgerStatus(false)} />
-        </CustomWrapper>
-
-        <li>
-          <a href="#">Existing inventory</a>
-        </li>
-        <li>
-          <a href="#">Tesla S</a>
-        </li>
-        <li>
-          <a href="#">Tesla S</a>
-        </li>
-        <li>
-          <a href="#">Tesla S</a>
-        </li>
-      </BurgerNav>
     </Container>
   );
 };
 
 export default Navbar;
 
-// <Link
-//                   to='/sign-up'
-//                   className='nav-links-mobile'
-//                   onClick={closeMobileMenu}
-//                 >
-//                   Sign Up
-//                 </Link>
 
 const Container = styled.div`
   min-height: 60px;
@@ -113,37 +106,4 @@ const RightMenu = styled.div`
     color: white;
   }
 `;
-const CustomMenu = styled(MenuIcon)`
-  cursor: pointer;
-`;
-const BurgerNav = styled.div`
-    position:fixed;
-    top:0;
-    right:0;
-    bottom:0;
-    background-color:white;
-    width:300px;
-    z-index:1
-    display:flex;
-    flex-direction:column;
-    list-style:none;
-    padding:20px;
-    text-align:start;
-    transform:${(props) => (props.show ? "translateX(0)" : "translateX(100%)")};
-    li {
-        padding: 15px 0;
-        border-bottom: 1px solid rgba(0, 0, 0, .2);
-           a{
-               font-weight:600;
-           }
-      }
-`;
 
-const CustomClose = styled(CloseIcon)`
-  cursor: pointer;
-  color: black;
-`;
-const CustomWrapper = styled.div`
-  display: flex;
-  justify-content: flex-end;
-`;

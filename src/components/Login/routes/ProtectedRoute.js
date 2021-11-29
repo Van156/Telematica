@@ -11,17 +11,15 @@ const ProtectedRoute = (props) => {
 
     let { isAyudanteAuthenticated, isMedicoAuthenticated, isAdminAuthenticated } = useAuthContext();
 
+    const { path } = props;
+    const admin_routes = [rutas.ADMIN, rutas.ADMIN_R];
+    const ayudante_routes = [rutas.AYUDANTE];
+    const medico_routes = [rutas.MEDICO];
+
     isAyudanteAuthenticated = getBool(isAyudanteAuthenticated);
     isMedicoAuthenticated = getBool(isMedicoAuthenticated);
     isAdminAuthenticated = getBool(isAdminAuthenticated);
-
-    const {path} = props;
-  
-    const admin_routes = [];
-    const ayudante_routes = [];
-    const medico_routes = [];
-
-    console.log(isAyudanteAuthenticated, isMedicoAuthenticated, isAdminAuthenticated)
+    console.log(isAyudanteAuthenticated, isMedicoAuthenticated, isAdminAuthenticated);
 
     if (!isAyudanteAuthenticated && !isMedicoAuthenticated && !isAdminAuthenticated) {
         console.log(0);
@@ -33,7 +31,7 @@ const ProtectedRoute = (props) => {
         } else if (medico_routes.includes(path)) {
             return <Redirect to={rutas.UNAUTHORIZED} />;
         }
-        return <Route {...props} />;  
+        return <Route {...props} />;
     } else if (!isAyudanteAuthenticated && isMedicoAuthenticated && !isAdminAuthenticated) {
         console.log(2);
         if (admin_routes.includes(path)) {
@@ -41,11 +39,14 @@ const ProtectedRoute = (props) => {
         } else if (ayudante_routes.includes(path)) {
             return <Redirect to={rutas.UNAUTHORIZED} />;
         }
-        return <Route {...props} />;  
+        return <Route {...props} />;
+    } else if (!isAyudanteAuthenticated && !isMedicoAuthenticated && isAdminAuthenticated) {
+        console.log(3);
+        return <Route {...props} />;
     }
 
-    console.log(3);
-    return <Route {...props} />;
+    return <Redirect to={rutas.UNAUTHORIZED} />;
+
 }
 
 export default ProtectedRoute;

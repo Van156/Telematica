@@ -1,6 +1,5 @@
 import { createContext, useState, useCallback, useMemo } from "react";
 import PropTypes from 'prop-types';
-const CLIENT_ID = '819657394751-i8a1qcf8tede4ipuddop6jvtuogs94vh.apps.googleusercontent.com';
 
 // Cookies for login authentication.
 const LOGIN_ADMIN = 'LOGIN_ADMIN';
@@ -24,11 +23,11 @@ export default function AuthContextProvider({children}) {
         window.localStorage.setItem(LOGIN_ADMIN, false);      
     }, []);
 
-    const leginMedico = useCallback(() => {        
+    const loginMedico = useCallback(() => {        
         setIsAyudanteAuthenticated(false);
         setIsMedicoAuthenticated(true);
         setIsAdminAuthenticated(false);
-        window.localStorage.setItem(LOGIN_AYUDANTE, true);
+        window.localStorage.setItem(LOGIN_AYUDANTE, false);
         window.localStorage.setItem(LOGIN_MEDICO, true);
         window.localStorage.setItem(LOGIN_ADMIN, false);      
     }, []);
@@ -37,18 +36,18 @@ export default function AuthContextProvider({children}) {
         setIsAyudanteAuthenticated(false);
         setIsMedicoAuthenticated(false);
         setIsAdminAuthenticated(true);
-        window.localStorage.setItem(LOGIN_AYUDANTE, true);
+        window.localStorage.setItem(LOGIN_AYUDANTE, false);
         window.localStorage.setItem(LOGIN_MEDICO, false);
         window.localStorage.setItem(LOGIN_ADMIN, true);      
     }, []);
 
     const logout = useCallback(() => {
-        window.localStorage.setItem(LOGIN_AYUDANTE, false);
-        window.localStorage.setItem(LOGIN_MEDICO, false);
-        window.localStorage.setItem(LOGIN_ADMIN, false);
         setIsAyudanteAuthenticated(false);
         setIsMedicoAuthenticated(false);
         setIsAdminAuthenticated(false);
+        window.localStorage.setItem(LOGIN_AYUDANTE, false);
+        window.localStorage.setItem(LOGIN_MEDICO, false);
+        window.localStorage.setItem(LOGIN_ADMIN, false);
     }, []);
 
     const value = useMemo(() => ({
@@ -56,10 +55,10 @@ export default function AuthContextProvider({children}) {
         isMedicoAuthenticated,
         isAdminAuthenticated,
         loginAyudante,
-        leginMedico,
+        loginMedico,
         loginAdmin,
         logout
-    }), [isAyudanteAuthenticated, isMedicoAuthenticated, isAdminAuthenticated, loginAyudante, leginMedico, loginAdmin, logout]);
+    }), [isAyudanteAuthenticated, isMedicoAuthenticated, isAdminAuthenticated, loginAyudante, loginMedico, loginAdmin, logout]);
 
     return (
         <AuthContext.Provider value={value}>
