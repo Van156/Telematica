@@ -19,7 +19,7 @@ const UsuarioCreate = () => {
             usuario: data.get('usuario'), 
             contraseña: data.get('contraseña') 
         }).then((res) => {
-            const info = res;
+            const info = res.data.message;
             console.log(res)
             if (info === "0") {
                 alert("El usuario ya existe.");
@@ -51,7 +51,7 @@ const UsuarioCreate = () => {
                             </div>
                             <div class="col-12 mt-2">
                                 <label for="nombre" class="form-label align-left">Nombre:</label>
-                                <input class="form-control" type="text" id="nombre" name="nombre" placeholder="Ingrese un nombre..." />
+                                <input class="form-control" type="text" id="nombre" name="nombre" placeholder="Ingrese un nombre..." required="true" />
                             </div>
                             <div class="col-12 mt-2">
                                 <label for="apellido" class="form-label align-left">Apellido:</label>
@@ -59,15 +59,15 @@ const UsuarioCreate = () => {
                             </div>
                             <div class="col-12 mt-2">
                                 <label for="cedula" class="form-label align-left">Cédula:</label>
-                                <input class="form-control" type="number" id="cedula" name="cedula" placeholder="Cédula de identificación..." />
+                                <input class="form-control" type="number" id="cedula" name="cedula" placeholder="Cédula de identificación..." required="true"/>
                             </div>
                             <div class="col-12 mt-2">
                                 <label for="usuario" class="form-label align-left">Nombre de usuario:</label>
-                                <input class="form-control" type="text" id="usuario" name="usuario" placeholder="Ingrese un nombre de usuario..." />
+                                <input class="form-control" type="text" id="usuario" name="usuario" placeholder="Ingrese un nombre de usuario..." required="true"/>
                             </div>
                             <div class="col-12 mt-2">
                                 <label for="contraseña" class="form-label align-left">Contraseña:</label>
-                                <input class="form-control" type="password" id="contraseña" name="contraseña" placeholder="Ingrese una contraseña..." />
+                                <input class="form-control" type="password" id="contraseña" name="contraseña" placeholder="Ingrese una contraseña..." required="true" />
                             </div>
                             <button class="btn btn-success justify-self-between mt-3 mb-2">Registrar</button>
                         </form>
