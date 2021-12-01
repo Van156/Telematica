@@ -84,11 +84,12 @@ const CasoCreate = () => {
                         alert("Datos insertados exitosamente.");
                     } else {
                         alert("Ha ocurrido un error, intente nuevamente.");
-                    }
+                    }                    
                 });
         } else {
             alert("El estado del paciente no puede ser actualizado porque falleció.");
         }
+        getPacientesMuertos();
     };
 
     const [isPositivo, setIsPositivo] = useState(false);
