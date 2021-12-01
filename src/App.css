@@ -140,3 +140,22 @@
 .text-decoration-none {
   text-decoration: none;
 }
+
+.marg-top {
+  margin-top: 150px;
+  display: flex;
+  justify-content: center;
+}
+
+.marg-top h2 {
+  color: red;
+}
+
+.list-style-none {
+  list-style:none;
+  padding: 20px;
+}
+
+.navbar-top {
+  margin-top: 100px;
+}

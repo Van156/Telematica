@@ -4,8 +4,13 @@ import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 import styled from "styled-components";
 import useAuthContext from "./Login/auth/hooks/useAuthContext";
+import { useHistory } from "react-router";
+import { rutas } from "../path";
 
 const Navbar = () => {
+
+  const history = useHistory();
+
   function getBool(val) {
     return !!JSON.parse(String(val).toLowerCase());
   }
@@ -24,26 +29,19 @@ const Navbar = () => {
   let loginButton = null;
   let logoutButton = null;
 
-  if (
-    !isAyudanteAuthenticated &&
-    !isMedicoAuthenticated &&
-    !isAdminAuthenticated
-  ) {
+  if (!isAyudanteAuthenticated && !isMedicoAuthenticated && !isAdminAuthenticated) {
     logoutButton = null;
     loginButton = (
       <>
-        <Link className="text-decoration-none" to="/Login">
-          <Button variant="contained" color="primary">
-            Login
-          </Button>
-        </Link>
+        <button
+          class="btn btn-outline-success my-2 my-sm-0 text-decoration-none"
+          onClick={() => { history.push(rutas.LOGIN) }}
+        >
+          Login
+        </button>
       </>
     );
-  } else if (
-    isAyudanteAuthenticated ||
-    isMedicoAuthenticated ||
-    isAdminAuthenticated
-  ) {
+  } else if (isAyudanteAuthenticated || isMedicoAuthenticated || isAdminAuthenticated) {
     loginButton = null;
     logoutButton = (
       <button
@@ -55,6 +53,65 @@ const Navbar = () => {
     );
   }
 
+  let tabs = null;
+
+  if (isAdminAuthenticated) {
+    tabs = <>
+      <li class="nav-item dropdown list-style-none">
+        <a class="nav-link dropdown-toggle" href={rutas.ADMIN} id="navbarDropdownMenuLink" data-toggle="dropdown" aria-expanded="false">
+        Administrador
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href={rutas.ADMIN}>Usuarios</a>
+          <a class="dropdown-item" href={rutas.ADMIN_R}>Agregar Usuario</a>
+          <a class="dropdown-item" href={rutas.ADMIN_U}>Modificar Usuario</a>
+        </div>
+      </li>  
+      <li class="nav-item dropdown list-style-none">
+        <a class="nav-link dropdown-toggle" href={rutas.ADMIN} id="navbarDropdownMenuLink" data-toggle="dropdown" aria-expanded="false">
+        Ayudante
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href={rutas.AYUDANTE_L}>Casos</a>
+          <a class="dropdown-item" href={rutas.AYUDANTE}>Agregar Caso</a>
+        </div>
+      </li>  
+      <li class="nav-item dropdown list-style-none">
+        <a class="nav-link dropdown-toggle" href={rutas.ADMIN} id="navbarDropdownMenuLink" data-toggle="dropdown" aria-expanded="false">
+        Médico
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href={rutas.MEDICO}>Mapa General</a>
+          <a class="dropdown-item" href={rutas.MEDICO_B}>Búsqueda</a>
+        </div>
+      </li>  
+    </>
+  } else if (isAyudanteAuthenticated) {
+    tabs = <>
+      <li class="nav-item dropdown list-style-none">
+        <a class="nav-link dropdown-toggle" href={rutas.ADMIN} id="navbarDropdownMenuLink" data-toggle="dropdown" aria-expanded="false">
+        Ayudante
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href={rutas.AYUDANTE_L}>Casos</a>
+          <a class="dropdown-item" href={rutas.AYUDANTE}>Agregar Caso</a>
+        </div>
+      </li>  
+    </>
+  } else if (isMedicoAuthenticated) {
+    tabs = <>
+      <li class="nav-item dropdown list-style-none">
+        <a class="nav-link dropdown-toggle" href={rutas.ADMIN} id="navbarDropdownMenuLink" data-toggle="dropdown" aria-expanded="false">
+        Médico
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href={rutas.MEDICO}>Mapa General</a>
+          <a class="dropdown-item" href={rutas.MEDICO_B}>Búsqueda</a>
+        </div>
+      </li>  
+    </>
+  }
+
   return (
     <Container>
       <Link className="text-decoration-none" to="/">
@@ -62,18 +119,8 @@ const Navbar = () => {
       </Link>
 
       <Menu>
-        <Link className="link" to="/ModuloAdministracion">
-          Administracion
-        </Link>
-        <Link className="link" to="/ModuloRegistroCaso">
-          Registro Caso
-        </Link>
-        <Link className="link" to="/ModuloGestionarCaso">
-          Gestionar Caso
-        </Link>
-        <Link className="link" to="/ModuloVisualizacion">
-          Visualizacion
-        </Link>
+        {tabs}
+
       </Menu>
       <RightMenu>
         {loginButton}

@@ -120,7 +120,7 @@ const ModuloVisualizacion = () => {
     setPaginatedData(paginatedCurrent);
   };
   return (
-    <div className="visualizacionContainer">
+    <div className="visualizacionContainer navbar-top">
       <div className="search">
         <input
           type="text"

@@ -38,7 +38,7 @@ const ListarUsuarios = () => {
     }
 
     return (
-        <div class="col-sm-10 offset-sm-1 p-4 rounded">                
+        <div class="col-sm-10 offset-sm-1 p-4 rounded navbar-top">                
                 <h2 class="mg-l text-left mb-2">Usuarios:</h2> 
             <table class="table">
                 <thead class="thead-dark">

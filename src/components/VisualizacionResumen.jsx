@@ -161,7 +161,7 @@ const MapaResumen = () => {
   }, [value]);
 
   return (
-    <div className="MapaResumen">
+    <div className="MapaResumen navbar-top">
       <div className="Bar margin-bottom">
         <h2 className="padding">Casos registrados y muertes registradas </h2>
         <div className="d-flex align-items-center ">

@@ -32,7 +32,7 @@ const UsuarioCreate = () => {
 
   return (
     <>
-      <div class="modal-dialog text-center mt-0">
+      <div class="modal-dialog text-center d-flex align-items-center">
         <div class="col-sm-10 main-section">
           <div class="modal-content">
             <div class="center-img">

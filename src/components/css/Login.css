@@ -1,11 +1,13 @@
 .bgimage{
     /* background-image:url(https://cdn.hipwallpaper.consola/i/23/44/fPaU4V.jpg) no-repeat center center fixed; */
-    background-image: url('https://www.xtrafondos.com/descargar.php?id=4014&resolucion=2560x1440');
-    background-position: center;
+    width: 100vw;
+    height: 100vh;
+    display:  flex;
+    align-items: center;
+    background-image: url('http://c.files.bbci.co.uk/D505/production/_115033545_gettyimages-1226314512.jpg');
+    background-repeat: repeat;
     background-size: cover;
-    background-repeat: no-repeat;
-    
-
+    border: 1px soli;
 }
 
 .background{
