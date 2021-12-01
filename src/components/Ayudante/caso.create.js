@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { rutas } from "../../path";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.css";
 import Geocode from "react-geocode";
 import TextField from "@mui/material/TextField";
-import Stack from "@mui/material/Stack";
 
-var muertos = [];
 
 const CasoCreate = () => {
     Geocode.setLanguage("es");
@@ -14,10 +12,6 @@ const CasoCreate = () => {
     Geocode.setRegion("co");
     Geocode.setLocationType("ROOFTOP");
     Geocode.enableDebug();
-
-    useEffect(() => {
-        getPacientesMuertos();
-    }, []);
 
     const dir2latlng = (direccion) => {
         return new Promise(function (resolve, reject) {
@@ -34,15 +28,8 @@ const CasoCreate = () => {
         });
     };
 
-    const getPacientesMuertos = async () => {
-        const response = await axios.get(rutas.DB_URL + "pacientes/muertos");
-        muertos = response.data;
-    };
-
     const handleSubmit = async (event) => {
         event.preventDefault();
-
-        await getPacientesMuertos();
 
         const data = new FormData(event.target);
         const post_url = rutas.DB_URL + "ayudante";
@@ -59,11 +46,13 @@ const CasoCreate = () => {
         const tra_lat = response.lat;
         const tra_lng = response.lng;
 
-        console.log(muertos, parseInt(data.get("cedula")));
-
-        if (!muertos.includes(parseInt(data.get("cedula")))) {
-            axios
-                .post(post_url, {
+        await axios.get(rutas.DB_URL + "pacientes/muertos").then((info, err) => {
+            if (err) {
+                console.log('Ha ocurrido un error.');
+                return;
+            }
+            if (!info.data.includes(parseInt(data.get("cedula")))) {
+                axios.post(post_url, {
                     nombre: data.get("nombre"),
                     apellido: data.get("apellido"),
                     cedula: data.get("cedula"),
@@ -78,19 +67,19 @@ const CasoCreate = () => {
                     resultado: data.get("resultado"),
                     fecha_examen: String(data.get("fecha_examen")).replaceAll("-", "/"),
                     estado: data.get("estado"),
-                })
-                .then((res) => {
+                }).then((res) => {
                     const info = res.data.message;
                     console.log(info);
                     if (info === "1") {
                         alert("Datos insertados exitosamente.");
                     } else {
                         alert("Ha ocurrido un error, intente nuevamente.");
-                    }                    
+                    }
                 });
-        } else {
-            alert("El estado del paciente no puede ser actualizado porque falleció.");
-        }        
+            } else {
+                alert("El estado del paciente no puede ser actualizado porque falleció.");
+            }
+        });
     };
 
     const [isPositivo, setIsPositivo] = useState(false);

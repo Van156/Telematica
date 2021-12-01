@@ -26,13 +26,11 @@ const ListarUsuarios = () => {
         }        
     }
 
-    const deleteUsuario = (username) => {
-        let url = rutas.DB_URL + `admin/${username}`;
+    const deleteUsuario = (id) => {
+        let url = rutas.DB_URL + `admin/${id}`;
         
-        axios.delete(url, {
-            usuario: username,
-        }).then(() => {
-            setUsuarios(usuarios.filter(usuario => usuario.usuario !== username));
+        axios.delete(url, {}).then(() => {
+            setUsuarios(usuarios.filter(usuario => usuario.id !== id));
             alert("Usuario eliminado exitosamente.");            
         })
     }
@@ -65,7 +63,7 @@ const ListarUsuarios = () => {
                                 <td>
                                     <button className="btn btn-warning btn-form " data-bs-toggle="modal" data-bs-target="#editarProducto" onClick={() => { history.push(rutas.ADMIN_U) }}><FontAwesomeIcon icon={faEdit} /></button>
                                     {"   "}
-                                    <button className="btn btn-danger" onClick={() => { deleteUsuario(usuario.usuario) }}><FontAwesomeIcon icon={faTrashAlt} /></button>
+                                    <button className="btn btn-danger" onClick={() => { deleteUsuario(usuario.id) }}><FontAwesomeIcon icon={faTrashAlt} /></button>
                                 </td>
                             </tr>
                         )) 
