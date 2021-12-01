@@ -6,6 +6,7 @@
   width: 80vw;
   display: flex;
   flex-direction: column;
+  margin-top: 40px;
 }
 .Bar {
   height: 260px;
@@ -14,7 +15,7 @@
 }
 .Pie {
   height: 300px;
-  width: 30vw;
+  width: 33vw;
   margin: 30px;
 }
 
@@ -133,5 +134,9 @@
 }
 
 .link {
+  text-decoration: none;
+}
+
+.text-decoration-none {
   text-decoration: none;
 }

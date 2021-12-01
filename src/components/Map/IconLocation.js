@@ -12,21 +12,21 @@ export const IconLocation = L.icon({
 });
 export const IconLocationGreen = L.icon({
   iconUrl:
-    "https://raw.githubusercontent.com/Van156/Mancos2.0/59ddfa052b3917069cec0184b793d133d43158bc/http___icon-park.com_imagefiles_location_map_pin_green5.svg?token=ASCZEE4AKCFRHSHVBUTDFHTBU6NR6",
+    "https://raw.githubusercontent.com/Van156/mancos/d04cd8334f3feb41fc89f5bf4a190b1747791fbc/http___icon-park.com_imagefiles_location_map_pin_green5.svg",
 
   iconSize: [35, 35],
   className: "leaflet-venue-icon",
 });
 export const IconLocationYellow = L.icon({
   iconUrl:
-    "https://raw.githubusercontent.com/Van156/Mancos2.0/59ddfa052b3917069cec0184b793d133d43158bc/http___icon-park.com_imagefiles_location_map_pin_yellow5.svg?token=ASCZEE37H5Y7YHMP3Y44643BU6N3W",
+    "https://raw.githubusercontent.com/Van156/mancos/d04cd8334f3feb41fc89f5bf4a190b1747791fbc/http___icon-park.com_imagefiles_location_map_pin_yellow5.svg",
 
   iconSize: [35, 35],
   className: "leaflet-venue-icon",
 });
 export const IconLocationOrange = L.icon({
   iconUrl:
-    "https://raw.githubusercontent.com/Van156/Mancos2.0/59ddfa052b3917069cec0184b793d133d43158bc/http___icon-park.com_imagefiles_location_map_pin_orange5.svg?token=ASCZEE2BOOUUBDG7SHZBI63BU6NLW",
+    "https://raw.githubusercontent.com/Van156/mancos/d04cd8334f3feb41fc89f5bf4a190b1747791fbc/http___icon-park.com_imagefiles_location_map_pin_orange5.svg",
 
   iconSize: [35, 35],
   className: "leaflet-venue-icon",
@@ -34,14 +34,14 @@ export const IconLocationOrange = L.icon({
 
 export const IconLocationPink = L.icon({
   iconUrl:
-    "https://raw.githubusercontent.com/Van156/Mancos2.0/59ddfa052b3917069cec0184b793d133d43158bc/http___icon-park.com_imagefiles_location_map_pin_pink6.svg?token=ASCZEEYU723VQLDCJNCSNUDBU6NNC",
+    "https://raw.githubusercontent.com/Van156/mancos/d04cd8334f3feb41fc89f5bf4a190b1747791fbc/http___icon-park.com_imagefiles_location_map_pin_pink6.svg",
 
   iconSize: [35, 35],
   className: "leaflet-venue-icon",
 });
 export const IconLocationRed = L.icon({
   iconUrl:
-    "https://raw.githubusercontent.com/Van156/Mancos2.0/59ddfa052b3917069cec0184b793d133d43158bc/http___icon-park.com_imagefiles_location_map_pin_red5.svg?token=ASCZEE6TUC4ADIBAMRMMBQLBU6NPU",
+    "https://raw.githubusercontent.com/Van156/mancos/d04cd8334f3feb41fc89f5bf4a190b1747791fbc/http___icon-park.com_imagefiles_location_map_pin_red5.svg",
 
   iconSize: [35, 35],
   className: "leaflet-venue-icon",

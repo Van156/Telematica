@@ -6,12 +6,16 @@ import styled from "styled-components";
 import useAuthContext from "./Login/auth/hooks/useAuthContext";
 
 const Navbar = () => {
-
   function getBool(val) {
     return !!JSON.parse(String(val).toLowerCase());
   }
 
-  let { isAyudanteAuthenticated, isMedicoAuthenticated, isAdminAuthenticated, logout } = useAuthContext();
+  let {
+    isAyudanteAuthenticated,
+    isMedicoAuthenticated,
+    isAdminAuthenticated,
+    logout,
+  } = useAuthContext();
 
   isAyudanteAuthenticated = getBool(isAyudanteAuthenticated);
   isMedicoAuthenticated = getBool(isMedicoAuthenticated);
@@ -20,23 +24,40 @@ const Navbar = () => {
   let loginButton = null;
   let logoutButton = null;
 
-  if (!isAyudanteAuthenticated && !isMedicoAuthenticated && !isAdminAuthenticated) {
+  if (
+    !isAyudanteAuthenticated &&
+    !isMedicoAuthenticated &&
+    !isAdminAuthenticated
+  ) {
     logoutButton = null;
-    loginButton = <>
-        <Link to="/Login">
+    loginButton = (
+      <>
+        <Link className="text-decoration-none" to="/Login">
           <Button variant="contained" color="primary">
             Login
           </Button>
         </Link>
-    </>
-  } else if (isAyudanteAuthenticated || isMedicoAuthenticated || isAdminAuthenticated) {
+      </>
+    );
+  } else if (
+    isAyudanteAuthenticated ||
+    isMedicoAuthenticated ||
+    isAdminAuthenticated
+  ) {
     loginButton = null;
-    logoutButton = <button class="btn btn-outline-danger my-2 my-sm-0" onClick={logout}>Logout</button>;
+    logoutButton = (
+      <button
+        class="btn btn-outline-danger my-2 my-sm-0 text-decoration-none"
+        onClick={logout}
+      >
+        Logout
+      </button>
+    );
   }
 
   return (
     <Container>
-      <Link to="/">
+      <Link className="text-decoration-none" to="/">
         <h1>Covid Tracker</h1>
       </Link>
 
@@ -63,7 +84,6 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
 
 const Container = styled.div`
   min-height: 60px;
@@ -106,4 +126,3 @@ const RightMenu = styled.div`
     color: white;
   }
 `;
-

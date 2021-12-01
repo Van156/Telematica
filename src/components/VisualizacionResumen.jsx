@@ -67,7 +67,7 @@ const MapaResumen = () => {
         labels: [
           "Tratamiento en casa",
           "Tratamiento en hospital",
-          "En Uci",
+          "En UCI",
           "Muertos",
         ],
         datasets: [
@@ -98,7 +98,7 @@ const MapaResumen = () => {
         ],
       });
       setData3({
-        labels: ["Infectados", "Muertes", "Curados"],
+        labels: ["Infectados", "Muertos", "Curados"],
         datasets: [
           {
             label: "# of Votes",
@@ -189,7 +189,7 @@ const MapaResumen = () => {
             />
           </LocalizationProvider>
 
-          <div className="margin-left">
+          <div className="margin-left ">
             <Button
               variant="contained"
               className="margin-left"
@@ -242,7 +242,7 @@ const MapaResumen = () => {
           />
         )}
       </div>
-      <div className="Container-pie">
+      <div className="Container-pie margin-top">
         <div className="Pie">
           <h3 className="paddings text-center">Resultados examenes</h3>
           {data1 && (
@@ -267,7 +267,7 @@ const MapaResumen = () => {
           {data2 && <Doughnut data={data2} height={400} width={600} />}
         </div>
         <div className="Pie">
-          <h3 className="paddings text-center">Caso totales</h3>
+          <h3 className="paddings text-center">Casos totales</h3>
           {data3 && <Doughnut data={data3} height={400} width={600} />}
         </div>
       </div>

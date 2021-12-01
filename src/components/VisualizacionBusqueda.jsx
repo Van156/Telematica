@@ -137,7 +137,7 @@ const ModuloVisualizacion = () => {
             onChange={handleSelect}
           >
             <option selected disabled>
-              Buscar por...
+              Buscar por ...
             </option>
             <option value="1">Cedula</option>
             <option value="2">Id de Caso</option>
