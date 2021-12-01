@@ -12,9 +12,9 @@ const ProtectedRoute = (props) => {
     let { isAyudanteAuthenticated, isMedicoAuthenticated, isAdminAuthenticated } = useAuthContext();
 
     const { path } = props;
-    const admin_routes = [rutas.ADMIN, rutas.ADMIN_R];
+    const admin_routes = [rutas.ADMIN, rutas.ADMIN_R, rutas.ADMIN_U];
     const ayudante_routes = [rutas.AYUDANTE];
-    const medico_routes = [rutas.MEDICO];
+    const medico_routes = [rutas.MEDICO, rutas.MEDICO_B];
 
     isAyudanteAuthenticated = getBool(isAyudanteAuthenticated);
     isMedicoAuthenticated = getBool(isMedicoAuthenticated);

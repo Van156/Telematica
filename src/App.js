@@ -1,26 +1,24 @@
 import React from "react";
 import "./App.css";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
-import ModuloAdministracion from "./components/ModuloAdministracion";
-import ModuloGestionarCaso from "./components/ModuloGestionarCaso";
-import ModuloVisualizacion from "./components/ModuloVisualizacion";
-import ModuloRegistroCaso from "./components/ModuloRegistroCaso";
-import Login from "./components/Login/Login";
-import Navbar from "./components/Navbar";
-import MapaGeneral from "./components/MapaGeneral";
-import MapaResumen from "./components/MapaResumen";
-import PruebaApi from "./components/PruebaApi";
+import { BrowserRouter as Router, Switch } from "react-router-dom";
 import { rutas } from "./path";
 
-import UsuarioCreate from "./components/Admin/registrar";
-import ListarUsuarios from "./components/Admin/list";
-import UsuarioUpdate from "./components/Admin/update";
+import Login from "./components/Login/Login";
+import Navbar from "./components/Navbar";
+import Unauthorized from "./components/views/unauthorized";
+
+import UsuarioCreate from "./components/Admin/usuario.create";
+import ListarUsuarios from "./components/Admin/usuario.lista";
+import UsuarioUpdate from "./components/Admin/usuario.update";
 
 import CasoCreate from "./components/Ayudante/caso.create";
 
 import ProtectedRoute from "./components/Login/routes/ProtectedRoute";
 import PublicRoute from "./components/Login/routes/PublicRoute";
+
+import MapaResumen from "./components/VisualizacionResumen";
+import MapaGeneral from "./components/VisualizacionGeneral";
+import ModuloVisualizacion from "./components/VisualizacionBusqueda";
 
 function App() {
   return (
@@ -30,18 +28,17 @@ function App() {
         <Switch>
           <PublicRoute exact path="/" component={MapaResumen} />
           <PublicRoute exact path={rutas.LOGIN} component={Login} />
-          <ProtectedRoute exact path={rutas.AYUDANTE} component={CasoCreate} />
-          <ProtectedRoute exact path={rutas.MEDICO} component={MapaGeneral} />
           
+          <ProtectedRoute exact path={rutas.AYUDANTE} component={CasoCreate} />
+
+          <ProtectedRoute exact path={rutas.MEDICO} component={MapaGeneral} />
+          <ProtectedRoute exact path={rutas.MEDICO_B} component={ModuloVisualizacion} />
+
           <ProtectedRoute exact path={rutas.ADMIN} component={ListarUsuarios} />
           <ProtectedRoute exact path={rutas.ADMIN_U} component={UsuarioUpdate} />
           <ProtectedRoute exact path={rutas.ADMIN_R} component={UsuarioCreate} />
 
-          <PublicRoute exact path={rutas.UNAUTHORIZED} component={ModuloVisualizacion} />
-          <PublicRoute exact path="/ModuloGestionarCaso" component={ModuloVisualizacion} />
-          <Route exact path="/ModuloVisualizacion" component={ModuloVisualizacion} />
-          <Route exact path="/ModuloVisualizacion/MapaGeneral" component={MapaGeneral} />
-          <Route exact path="/mapa" component={PruebaApi} />
+          <PublicRoute exact path={rutas.UNAUTHORIZED} component={Unauthorized} />
         </Switch>
       </Router>
     </div>

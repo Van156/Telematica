@@ -3,6 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "date-fns": "^2.27.0",
+    "loaded": "^0.1.0",
+    "lodash": "^4.17.21",
+    "react-date-range": "^1.4.0",
+    "react-datepicker": "^4.4.0",
+    "react-scroll": "^1.8.4",
+    "rsuite": "^5.2.3",
     "@date-io/date-fns": "^2.11.0",
     "@date-io/dayjs": "^2.11.0",
     "@date-io/luxon": "^2.11.1",
