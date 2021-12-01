@@ -6,6 +6,8 @@ import Geocode from "react-geocode";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 
+var muertos = [];
+
 const CasoCreate = () => {
     Geocode.setLanguage("es");
     Geocode.setApiKey("AIzaSyCajUA3mYzE7u9JhvqDXDUHJTG304p7R3I");
@@ -32,12 +34,9 @@ const CasoCreate = () => {
         });
     };
 
-    const [muertos, setMuertos] = useState([]);
-
     const getPacientesMuertos = async () => {
         const response = await axios.get(rutas.DB_URL + "pacientes/muertos");
-        console.log(response.data)
-        setMuertos(response.data);
+        muertos = response.data;
     };
 
     const handleSubmit = async (event) => {
