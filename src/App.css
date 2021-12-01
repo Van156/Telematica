@@ -1,15 +1,8 @@
-.leaflet-container {
-  width: 100vw;
-  height: 90vh;
-}
-
 .visualizacionContainer {
   margin-top: 60px;
 }
 
 .MapaResumen {
-  margin-top: 60px;
-
   width: 80vw;
   display: flex;
   flex-direction: column;
@@ -69,73 +62,76 @@
   }
 }
 
-.btn-primary{
-    margin: 5px 0 25px;
+.btn-primary {
+  margin: 5px 0 25px;
 }
 
-.main-section{
-    margin: 0 auto;
-    margin-top: 25%;
-    padding: 0;
+.main-section {
+  margin: 0 auto;
+  margin-top: 25%;
+  padding: 0;
 }
-.modal-content{
-    background-color: #3b4652;
-    opacity: .85;
-    padding: 0 20px;
-    box-shadow: 0px 0px 3px #848484;
-    -moz-box-shadow: 0px 0px 3px #848484;
-    -webkit-box-shadow: 0px 0px 3px #848484;
-    margin-top: 50px;
-    
-}
-
-.user-img{
-    width: 100px;
-    height: 100px;
-    margin-top: -50px;
-    margin-bottom:5px;
-    box-shadow: 0px 0px 3px #848484;
-    -moz-box-shadow: 0px 0px 3px #848484;
-    -webkit-box-shadow: 0px 0px 3px #848484;
-    border-radius: 50%;
-    align-self: center;
+.modal-content {
+  background-color: #3b4652;
+  opacity: 0.85;
+  padding: 0 20px;
+  box-shadow: 0px 0px 3px #848484;
+  -moz-box-shadow: 0px 0px 3px #848484;
+  -webkit-box-shadow: 0px 0px 3px #848484;
+  margin-top: 50px;
 }
 
-.center-img{
+.user-img {
+  width: 100px;
+  height: 100px;
+  margin-top: -50px;
+  margin-bottom: 5px;
+  box-shadow: 0px 0px 3px #848484;
+  -moz-box-shadow: 0px 0px 3px #848484;
+  -webkit-box-shadow: 0px 0px 3px #848484;
+  border-radius: 50%;
+  align-self: center;
+}
+
+.center-img {
   display: flex;
   justify-content: center;
 }
 
-.gap-2{
-    margin-top: 10px;
-    margin-bottom: 10px;
+.gap-2 {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
-.user-img img{
-    width: 100px;
-    height: 100px;
+.user-img img {
+  width: 100px;
+  height: 100px;
 }
 
-.form-group input{
-    height: 42px;
-    font-size: 18px;
-    border: 0;
-    border-radius: 5px;
+.form-group input {
+  height: 42px;
+  font-size: 18px;
+  border: 0;
+  border-radius: 5px;
 }
 
-.forgot{
-    padding: 5px 0;
+.forgot {
+  padding: 5px 0;
 }
 
-.forgot a{
-    color: #fff;
-    text-decoration: none;
+.forgot a {
+  color: #fff;
+  text-decoration: none;
 }
 
-.forgot a:hover{
-    color: black;
+.forgot a:hover {
+  color: black;
 }
 
-.align-left{
+.align-left {
   text-align: left;
+}
+
+.link {
+  text-decoration: none;
 }

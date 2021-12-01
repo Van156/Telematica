@@ -6,6 +6,7 @@ export const rutas = {
     ADMIN_R: "/admin/register",
     ADMIN_U: "/admin/update",
     AYUDANTE: "/ayudante",
+    AYUDANTE_L: "/ayudante/lista",
     MEDICO: "/medico",
     MEDICO_B: "/medico/busqueda"
 }

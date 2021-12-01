@@ -12,6 +12,7 @@ import ListarUsuarios from "./components/Admin/usuario.lista";
 import UsuarioUpdate from "./components/Admin/usuario.update";
 
 import CasoCreate from "./components/Ayudante/caso.create";
+import CasoLista from "./components/Ayudante/caso.lista";
 
 import ProtectedRoute from "./components/Login/routes/ProtectedRoute";
 import PublicRoute from "./components/Login/routes/PublicRoute";
@@ -30,6 +31,7 @@ function App() {
           <PublicRoute exact path={rutas.LOGIN} component={Login} />
           
           <ProtectedRoute exact path={rutas.AYUDANTE} component={CasoCreate} />
+          <ProtectedRoute exact path={rutas.AYUDANTE_L} component={CasoLista} />
 
           <ProtectedRoute exact path={rutas.MEDICO} component={MapaGeneral} />
           <ProtectedRoute exact path={rutas.MEDICO_B} component={ModuloVisualizacion} />

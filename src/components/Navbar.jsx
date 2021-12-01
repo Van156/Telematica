@@ -75,8 +75,8 @@ const Container = styled.div`
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1;
-  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 10;
+  background-color: rgb(0, 0, 0);
   color: white;
 `;
 const Menu = styled.div`
