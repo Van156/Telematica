@@ -42,6 +42,8 @@ const CasoCreate = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
+        await getPacientesMuertos();
+
         const data = new FormData(event.target);
         const post_url = rutas.DB_URL + "ayudante";
         const dir_residencia = `${data.get(
@@ -88,8 +90,7 @@ const CasoCreate = () => {
                 });
         } else {
             alert("El estado del paciente no puede ser actualizado porque falleció.");
-        }
-        getPacientesMuertos();
+        }        
     };
 
     const [isPositivo, setIsPositivo] = useState(false);
