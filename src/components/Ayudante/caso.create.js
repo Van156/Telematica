@@ -36,6 +36,7 @@ const CasoCreate = () => {
 
     const getPacientesMuertos = async () => {
         const response = await axios.get(rutas.DB_URL + "pacientes/muertos");
+        console.log(response.data)
         setMuertos(response.data);
     };
 
@@ -58,7 +59,7 @@ const CasoCreate = () => {
         const tra_lng = response.lng;
 
         console.log(muertos, parseInt(data.get("cedula")));
-        
+
         if (!muertos.includes(parseInt(data.get("cedula")))) {
             axios
                 .post(post_url, {
