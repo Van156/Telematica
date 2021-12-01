@@ -57,6 +57,8 @@ const CasoCreate = () => {
         const tra_lat = response.lat;
         const tra_lng = response.lng;
 
+        console.log(muertos, parseInt(data.get("cedula")));
+        
         if (!muertos.includes(parseInt(data.get("cedula")))) {
             axios
                 .post(post_url, {
