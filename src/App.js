@@ -15,6 +15,9 @@ import { rutas } from "./path";
 
 import UsuarioCreate from "./components/Admin/registrar";
 import ListarUsuarios from "./components/Admin/list";
+import UsuarioUpdate from "./components/Admin/update";
+
+import CasoCreate from "./components/Ayudante/caso.create";
 
 import ProtectedRoute from "./components/Login/routes/ProtectedRoute";
 import PublicRoute from "./components/Login/routes/PublicRoute";
@@ -27,10 +30,13 @@ function App() {
         <Switch>
           <PublicRoute exact path="/" component={MapaResumen} />
           <PublicRoute exact path={rutas.LOGIN} component={Login} />
-          <ProtectedRoute exact path={rutas.AYUDANTE} component={MapaGeneral} />
+          <ProtectedRoute exact path={rutas.AYUDANTE} component={CasoCreate} />
           <ProtectedRoute exact path={rutas.MEDICO} component={MapaGeneral} />
+          
           <ProtectedRoute exact path={rutas.ADMIN} component={ListarUsuarios} />
+          <ProtectedRoute exact path={rutas.ADMIN_U} component={UsuarioUpdate} />
           <ProtectedRoute exact path={rutas.ADMIN_R} component={UsuarioCreate} />
+
           <PublicRoute exact path={rutas.UNAUTHORIZED} component={ModuloVisualizacion} />
           <PublicRoute exact path="/ModuloGestionarCaso" component={ModuloVisualizacion} />
           <Route exact path="/ModuloVisualizacion" component={ModuloVisualizacion} />

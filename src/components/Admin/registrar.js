@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { rutas } from '../../path';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
