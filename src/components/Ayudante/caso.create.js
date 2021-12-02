@@ -150,7 +150,8 @@ const CasoCreate = () => {
                                     class="form-control"
                                     type="number"
                                     id="cedula"
-                                    name="cedula"
+                                    name="cedula"                                    
+                                    min="1" max="9999999999"
                                     placeholder="Cédula de identificación..."
                                     required="true"
                                 />
