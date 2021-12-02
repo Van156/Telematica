@@ -51,6 +51,7 @@ const CasoCreate = () => {
                 console.log('Ha ocurrido un error.');
                 return;
             }
+            console.log(info.data);
             if (!info.data.includes(parseInt(data.get("cedula")))) {
                 axios.post(post_url, {
                     nombre: data.get("nombre"),

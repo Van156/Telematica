@@ -22,12 +22,12 @@ const UsuarioCreate = () => {
       .then((res) => {
         const info = res.data.message;
         console.log(res, info);
-        if (info === "1") {
+        if (info === "0") {
           alert("El usuario ya existe.");
         } else {
           alert("Datos insertados exitosamente.");
         }
-      });
+      });   
   };
 
   return (
@@ -90,6 +90,8 @@ const UsuarioCreate = () => {
                   type="number"
                   id="cedula"
                   name="cedula"
+                  min="1" 
+                  max="99999999"
                   placeholder="Cédula de identificación..."
                   required="true"
                 />
