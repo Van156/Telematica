@@ -246,7 +246,7 @@ const ModuloVisualizacion = () => {
         <MapView data={location} center={center} option={1} />
 
         <div>
-          {estados && (
+          {estados && estados[0].resultado === "Positivo" && (
             <table class="table margin">
               <thead>
                 <tr>

@@ -53,14 +53,14 @@ const MapView = ({ data, option, center, data2 }) => {
                   endIcon={<WorkIcon />}
                   onClick={() => setCenter(1)}
                 >
-                  ubicacion
+                  Trabajo
                 </Button>
                 <Button
                   variant="contained"
                   endIcon={<HouseIcon />}
                   onClick={() => setCenter(2)}
                 >
-                  Ubicacion
+                  Residencia
                 </Button>
               </Stack>
             </div>
