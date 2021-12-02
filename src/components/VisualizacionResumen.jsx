@@ -104,7 +104,7 @@ const MapaResumen = () => {
             label: "# of Votes",
             data: [
               res.data.cantidad_infectados,
-              res.data.cantidad_muertos,
+              res.data.cantidad_muertes,
               res.data.cantidad_curados,
             ],
             backgroundColor: [
