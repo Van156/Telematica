@@ -7,283 +7,317 @@ import axios from "axios";
 import style from "styled-components";
 import { animateScroll as scroll } from "react-scroll";
 import _ from "lodash";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 const pageSize = 8;
 
 const CasoLista = () => {
-    const [location, setLocation] = useState();
-    const [data, setData] = useState();
-    const [estados, setEstados] = useState();
-    const [paginatedData, setPaginatedData] = useState();
-    const [currentPage, setCurrentPage] = useState(1);
-    const [pageCounts, setPageCounts] = useState();
-    const [center, setCenter] = useState();
+  const [data, setData] = useState();
+  const [estados, setEstados] = useState();
+  const [paginatedData, setPaginatedData] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageCounts, setPageCounts] = useState();
+  const [currentEstado, setCurrentEstado] = useState();
 
-    const getData = async () => {
-        try {
-            const res = await axios.get(rutas.DB_URL + "casos");
-            console.log("data res");
-            console.log(res);
-            console.log("data res fin");
-            setData(res.data.casos);
-            setPaginatedData(_(res.data.casos).slice(0).take(pageSize).value(0));
-            setPageCounts(Math.ceil(res.data.casos.length / pageSize));
-        } catch (error) {
-            console.log("Ha ocurrido un error");
-        }
-    };
-    useEffect(() => {
-        getData();
-    }, []);
-    const [busqueda, setBusqueda] = useState("");
-    const changeHandle = (e) => {
-        setBusqueda(e.target.value);
-    };
-    const [valueSelect, setValueSelect] = useState("");
+  const getData = async () => {
+    try {
+      const res = await axios.get(rutas.DB_URL + "casos");
 
-    const handleSelect = (e) => {
-        setValueSelect(e.target.value);
-    };
-    const getCasoData = async (cedula) => {
-        try {
-            const res = await axios.get(
-                rutas.DB_URL + `/pacientes/${cedula}/direcciones`
-            );
-
-            setLocation(res.data);
-            console.log("Center");
-            setCenter([
-                (res.data.residencia[0] + res.data.trabajo[0]) / 2,
-                (res.data.residencia[1] + res.data.trabajo[1]) / 2,
-            ]);
-            console.log(center);
-            console.log("center");
-        } catch (error) {
-            console.log("Ha ocurrido un error");
-        }
-    };
-
-    const getEstado = async (cedula) => {
-        try {
-            const res = await axios.get(rutas.DB_URL + `pacientes/${cedula}/estados`);
-            console.log(res.data);
-            setEstados(res.data);
-        } catch (error) {
-            console.log("Ha ocurrido un error");
-        }
-    };
-
-    const deleteCaso = (id) => {
-        let url = rutas.DB_URL + `ayudante/${id}`;
-        
-        axios.delete(url, {}).then(() => {
-            setPaginatedData(paginatedData.filter(caso => caso.id !== id));
-            alert("Caso eliminado exitosamente.");            
-        })
+      setData(res.data.casos);
+      setPaginatedData(_(res.data.casos).slice(0).take(pageSize).value(0));
+      setPageCounts(Math.ceil(res.data.casos.length / pageSize));
+    } catch (error) {
+      console.log("Ha ocurrido un error");
     }
+  };
+  useEffect(() => {
+    getData();
+  }, []);
+  const [busqueda, setBusqueda] = useState("");
+  const changeHandle = (e) => {
+    setBusqueda(e.target.value);
+  };
+  const [valueSelect, setValueSelect] = useState("");
+  const [isPositivo, setIsPositivo] = useState(false);
+  const [cedula, setCedula] = useState("");
 
-    const setCaso = (cedula) => {
-        getCasoData(cedula);
-        getEstado(cedula);
-        scroll.scrollToBottom();
-    };
+  const handleSelect = (e) => {
+    setValueSelect(e.target.value);
+  };
+  const getCasoData = async (cedula) => {
+    try {
+      const res = await axios.get(
+        rutas.DB_URL + `/pacientes/${cedula}/direcciones`
+      );
+    } catch (error) {
+      console.log("Ha ocurrido un error");
+    }
+  };
 
-    const pages = _.range(1, pageCounts + 1);
+  const getEstado = async (cedula) => {
+    try {
+      const res = await axios.get(rutas.DB_URL + `pacientes/${cedula}/estados`);
+      console.log(res.data);
+      setEstados(res.data);
+      if (res.data.length > 0) {
+        setCurrentEstado(res.data[res.data.length - 1].estado);
+      }
+    } catch (error) {
+      console.log("Ha ocurrido un error");
+    }
+  };
 
-    const pagination = (page) => {
-        setCurrentPage(page);
-        const startIndex = (page - 1) * pageSize;
-        let dataFilter = [];
-        if (data !== undefined) {
-            dataFilter = data.filter((caso) => {
-                if (busqueda === "") {
-                    return { data };
-                } else if (
-                    (caso.cedula.toString().includes(busqueda.toString()) ||
-                        caso.id.toString().includes(busqueda.toString())) &&
-                    valueSelect === "3"
-                ) {
-                    return caso;
-                } else if (
-                    caso.cedula.toString().includes(busqueda.toString()) &&
-                    valueSelect === "1"
-                ) {
-                    return caso;
-                } else if (
-                    caso.id.toString().includes(busqueda.toString()) &&
-                    valueSelect === "2"
-                ) {
-                    return caso;
-                }
-            });
+  const deleteCaso = (id) => {
+    let url = rutas.DB_URL + `ayudante/${id}`;
+
+    axios.delete(url, {}).then(() => {
+      setPaginatedData(paginatedData.filter((caso) => caso.id !== id));
+      alert("Caso eliminado exitosamente.");
+    });
+  };
+
+  const setCaso = (cedula) => {
+    getCasoData(cedula);
+    getEstado(cedula);
+    setCedula(cedula);
+    scroll.scrollToBottom();
+  };
+
+  const pages = _.range(1, pageCounts + 1);
+
+  const pagination = (page) => {
+    setCurrentPage(page);
+    const startIndex = (page - 1) * pageSize;
+    let dataFilter = [];
+    if (data !== undefined) {
+      dataFilter = data.filter((caso) => {
+        if (busqueda === "") {
+          return { data };
+        } else if (
+          (caso.cedula.toString().includes(busqueda.toString()) ||
+            caso.id.toString().includes(busqueda.toString())) &&
+          valueSelect === "3"
+        ) {
+          return caso;
+        } else if (
+          caso.cedula.toString().includes(busqueda.toString()) &&
+          valueSelect === "1"
+        ) {
+          return caso;
+        } else if (
+          caso.id.toString().includes(busqueda.toString()) &&
+          valueSelect === "2"
+        ) {
+          return caso;
         }
-        let paginatedCurrent = _(dataFilter)
-            .slice(startIndex)
-            .take(pageSize)
-            .value(0);
-        setPaginatedData(paginatedCurrent);
-    };
-    return (
-        <div className="visualizacionContainer navbar-top">
-            <div className="search">
-                <input
-                    type="text"
-                    value={busqueda}
-                    aria-label="Search"
-                    onChange={changeHandle}
-                    placeholder="Buscar Caso"
-                />
-                <div className="selectContainer">
-                    <select
-                        name="type-search"
-                        className="type-search"
-                        id="type-search"
-                        onChange={handleSelect}
-                    >
-                        <option selected disabled>
-                            Buscar por...
-                        </option>
-                        <option value="1">Cedula</option>
-                        <option value="2">Id de Caso</option>
-                        <option value="3">Cedula y Id de Caso</option>
-                    </select>
-                </div>
-                <SearchIcon className="search-icon" />
-            </div>
-            <nav className="d-flex justify-content-center">
-                <ul className="pagination">
-                    {pages &&
-                        pages.map((page) => (
-                            <li
-                                className={
-                                    page === currentPage ? "page-item active" : "page-item"
-                                }
-                            >
-                                <p className="page-link" onClick={() => pagination(page)}>
-                                    {page}
-                                </p>
-                            </li>
-                        ))}
-                </ul>
-            </nav>
-            <div>
-                <div>
-                    <table class="table table-bordered ">
-                        <thead>
-                            <tr>
-                                <th>Id Caso</th>
-                                <th>Nombre</th>
-                                <th>Apellido</th>
-                                <th>Cedula</th>
-                                <th>Sexo</th>
-                                <th>Fecha de nacimiento</th>
-                                <th>Dirección Residencia</th>
-                                <th>Dirección Trabajo</th>
-                                <th>Resultado Examen</th>
-                                <th>Fecha examen</th>
-                                <th>Accion</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {paginatedData &&
-                                paginatedData
-                                    .filter((caso) => {
-                                        if (busqueda === "") {
-                                            return { data };
-                                        } else if (
-                                            (caso.cedula.toString().includes(busqueda.toString()) ||
-                                                caso.id.toString().includes(busqueda.toString())) &&
-                                            valueSelect === "3"
-                                        ) {
-                                            return caso;
-                                        } else if (
-                                            caso.cedula.toString().includes(busqueda.toString()) &&
-                                            valueSelect === "1"
-                                        ) {
-                                            return caso;
-                                        } else if (
-                                            caso.id.toString().includes(busqueda.toString()) &&
-                                            valueSelect === "2"
-                                        ) {
-                                            return caso;
-                                        }
-                                    })
-                                    .map((caso, key) => (
-                                        <tr key={key}>
-                                            <td>{caso.id}</td>
-                                            <td>{caso.nombre}</td>
-                                            <td>{caso.apellido}</td>
-                                            <td>{caso.cedula}</td>
-                                            <td>{caso.sexo}</td>
-                                            <td>{caso.fecha_nacimiento}</td>
-                                            <td>{caso.dir_residencia}</td>
-                                            <td>{caso.dir_trabajo}</td>
-                                            <td>{caso.resultado}</td>
-                                            <td>{caso.fecha_examen}</td>
-                                            <td>
-                                                
-                                                <button className="btn btn-warning btn-form " data-bs-toggle="modal" data-bs-target="#editarProducto" onClick={() => { }}><FontAwesomeIcon icon={faEdit} /></button>
-                                                {"   "}
-                                                <button className="btn btn-danger" onClick={() => { deleteCaso(caso.id) }}><FontAwesomeIcon icon={faTrashAlt} /></button>
-                                                <button
-                                                    className="btn btn-success"
-                                                    onClick={() => setCaso(caso.cedula)}
-                                                >
-                                                    <PersonSearchIcon />
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    ))}
-                        </tbody>
-                    </table>
-                </div>
-                <nav className="d-flex justify-content-center">
-                    <ul className="pagination">
-                        {pages &&
-                            pages.map((page) => (
-                                <li
-                                    className={
-                                        page === currentPage ? "page-item active" : "page-item"
-                                    }
-                                >
-                                    <p className="page-link" onClick={() => pagination(page)}>
-                                        {page}
-                                    </p>
-                                </li>
-                            ))}
-                    </ul>
-                </nav>
-            </div>
+      });
+    }
+    let paginatedCurrent = _(dataFilter)
+      .slice(startIndex)
+      .take(pageSize)
+      .value(0);
+    setPaginatedData(paginatedCurrent);
+  };
 
-            <Container>
-                <div>
-                    {estados && (
-                        <table class="table margin">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Fecha Actualización</th>
-                                    <th scope="col">Estado</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {estados.map((estado, key) => {
-                                    return (
-                                        <tr key={key}>
-                                            <th>{key}</th>
-                                            <td>{estado.fecha_modificacion}</td>
-                                            <td>{estado.estado}</td>
-                                        </tr>
-                                    );
-                                })}
-                            </tbody>
-                        </table>
-                    )}
-                </div>
-            </Container>
+  return (
+    <div className="visualizacionContainer navbar-top">
+      <div className="search">
+        <input
+          type="text"
+          value={busqueda}
+          aria-label="Search"
+          onChange={changeHandle}
+          placeholder="Buscar Caso"
+        />
+        <div className="selectContainer">
+          <select
+            name="type-search"
+            className="type-search"
+            id="type-search"
+            onChange={handleSelect}
+          >
+            <option selected disabled>
+              Buscar por...
+            </option>
+            <option value="1">Cedula</option>
+            <option value="2">Id de Caso</option>
+            <option value="3">Cedula y Id de Caso</option>
+          </select>
         </div>
-    );
+        <SearchIcon className="search-icon" />
+      </div>
+      <nav className="d-flex justify-content-center">
+        <ul className="pagination">
+          {pages &&
+            pages.map((page) => (
+              <li
+                className={
+                  page === currentPage ? "page-item active" : "page-item"
+                }
+              >
+                <p className="page-link" onClick={() => pagination(page)}>
+                  {page}
+                </p>
+              </li>
+            ))}
+        </ul>
+      </nav>
+      <div>
+        <div>
+          <table class="table table-bordered ">
+            <thead>
+              <tr>
+                <th>Id Caso</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Cedula</th>
+                <th>Sexo</th>
+                <th>Fecha de nacimiento</th>
+                <th>Dirección Residencia</th>
+                <th>Dirección Trabajo</th>
+                <th>Resultado Examen</th>
+                <th>Fecha examen</th>
+                <th>Accion</th>
+              </tr>
+            </thead>
+            <tbody>
+              {paginatedData &&
+                paginatedData
+                  .filter((caso) => {
+                    if (busqueda === "") {
+                      return { data };
+                    } else if (
+                      (caso.cedula.toString().includes(busqueda.toString()) ||
+                        caso.id.toString().includes(busqueda.toString())) &&
+                      valueSelect === "3"
+                    ) {
+                      return caso;
+                    } else if (
+                      caso.cedula.toString().includes(busqueda.toString()) &&
+                      valueSelect === "1"
+                    ) {
+                      return caso;
+                    } else if (
+                      caso.id.toString().includes(busqueda.toString()) &&
+                      valueSelect === "2"
+                    ) {
+                      return caso;
+                    }
+                  })
+                  .map((caso, key) => (
+                    <tr key={key}>
+                      <td>{caso.id}</td>
+                      <td>{caso.nombre}</td>
+                      <td>{caso.apellido}</td>
+                      <td>{caso.cedula}</td>
+                      <td>{caso.sexo}</td>
+                      <td>{caso.fecha_nacimiento}</td>
+                      <td>{caso.dir_residencia}</td>
+                      <td>{caso.dir_trabajo}</td>
+                      <td>{caso.resultado}</td>
+                      <td>{caso.fecha_examen}</td>
+                      <td>
+                        <button
+                          className="btn btn-warning btn-form "
+                          data-bs-toggle="modal"
+                          data-bs-target="#editarProducto"
+                          onClick={() => {}}
+                        >
+                          <FontAwesomeIcon icon={faEdit} />
+                        </button>
+                        {"   "}
+                        <button
+                          className="btn btn-danger"
+                          onClick={() => {
+                            deleteCaso(caso.id);
+                          }}
+                        >
+                          <FontAwesomeIcon icon={faTrashAlt} />
+                        </button>
+                        <button
+                          className="btn btn-success"
+                          onClick={() => setCaso(caso.cedula)}
+                        >
+                          <PersonSearchIcon />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+            </tbody>
+          </table>
+        </div>
+        <nav className="d-flex justify-content-center">
+          <ul className="pagination">
+            {pages &&
+              pages.map((page) => (
+                <li
+                  className={
+                    page === currentPage ? "page-item active" : "page-item"
+                  }
+                >
+                  <p className="page-link" onClick={() => pagination(page)}>
+                    {page}
+                  </p>
+                </li>
+              ))}
+          </ul>
+        </nav>
+      </div>
+
+      <Container>
+        <div>
+          {estados && (
+            <div>
+              {estados[0].estado === "Muerte" ? (
+                <></>
+              ) : (
+                <div class="col-12 mt-2">
+                  <label for="estado" class="form-label align-left">
+                    Estado del usuario:
+                  </label>
+                  <select class="form-select" name="estado">
+                    <option value="En tratamiento hospital">
+                      En tratamiento hospital
+                    </option>
+                    <option value="En UCI">En UCI</option>
+                    <option value="Curado">Curado</option>
+                    <option value="Muerte">Muerte</option>
+                  </select>
+                  <button class="btn btn-success justify-self-between mt-3 mb-2">
+                    Actualizar estado
+                  </button>
+                </div>
+              )}
+
+              <div>
+                <h3>Cedula: {cedula}</h3>
+                <table class="table margin">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Fecha Actualización</th>
+                      <th scope="col">Estado</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {estados.map((estado, key) => {
+                      return (
+                        <tr key={key}>
+                          <th>{key}</th>
+                          <td>{estado.fecha_modificacion}</td>
+                          <td>{estado.estado}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+        </div>
+      </Container>
+    </div>
+  );
 };
 
 const Container = style.div`
