@@ -240,6 +240,9 @@ const CasoCreate = () => {
                                         Estado del usuario:
                                     </label>
                                     <select class="form-select" name="estado">
+                                        <option value="En tratamiento en casa">
+                                            En tratamiento en casa
+                                        </option>
                                         <option value="En tratamiento hospital">
                                             En tratamiento hospital
                                         </option>

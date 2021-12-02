@@ -79,11 +79,6 @@ const ModuloVisualizacion = () => {
     scroll.scrollToBottom();
   };
 
-  // const pageCounts = data ? Math.ceil(data.lengthg / pageSize) : 0;
-  // const pageCounts = 10;
-
-  // if (pageCounts === 1) return null;
-
   const pages = _.range(1, pageCounts + 1);
 
   const pagination = (page) => {
